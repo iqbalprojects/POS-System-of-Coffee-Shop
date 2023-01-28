@@ -25,7 +25,6 @@ const Bills = (props) => {
 
     const handleClick = (cart, e) => {
         const { id, checked } = e.target;
-        console.log(checked);
         if (checked) {
             setNewCarts([...newCarts, cart]);
         } else {

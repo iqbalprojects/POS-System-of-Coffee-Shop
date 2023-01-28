@@ -11,7 +11,6 @@ const Menus = () => {
     const [menus, setMenus] = useState([]);
     const [categories, setCategories] = useState([]);
     const [carts, setCarts] = useState([]);
-    const [cartsChecked, setCartsChecked] = useState([]);
     const [categorySelected, setCategorySelected] = useState("Semua");
     const [moodSelected, setMoodSelected] = useState("");
     const [sizeSelected, setSizeSelected] = useState("");
@@ -30,10 +29,7 @@ const Menus = () => {
         axios.get(API_URL + "keranjangs").then((response) => {
             setCarts(response.data);
         });
-        axios.get(API_URL + "keranjangschecked").then((response) => {
-            setCartsChecked(response.data);
-        });
-    }, [carts, cartsChecked]);
+    }, [carts]);
 
     function masukKeranjang(value) {
         axios
@@ -146,8 +142,6 @@ const Menus = () => {
 
     function tambahJumlah(value) {
         axios.get(API_URL + "keranjangs?id=" + value.id).then((response) => {
-            console.log(response.data[0].jumlah);
-            console.log(value.product.category.nama);
             let keranjang;
             if (value.product.category.nama == "Minuman") {
                 keranjang = {
@@ -233,7 +227,6 @@ const Menus = () => {
             <PaymentCart
                 {...{
                     carts,
-                    cartsChecked,
                     hapusKeranjang,
                     tambahJumlah,
                     kurangJumlah,
